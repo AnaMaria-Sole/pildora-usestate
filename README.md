@@ -1,70 +1,146 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React ´useState´ Hook Examples
 
-## Available Scripts
 
-In the project directory, you can run:
+This repository contains simple examples demonstrating the use of the ´useState´ hook in React. The useState hook is a fundamental feature in React that allows you to add state to functional components.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table of Contents
+- Introduction
+- Getting Started
+- Examples
+  - Contador
+  - ActualizarTexto
+  - Nombre
+- Running the Examples
+# Introduction
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The useState hook is used to manage the state in a React functional component. It returns an array containing the current state value and a function to update that value. This hook allows you to add local state to your components, which can be modified over time in response to user interactions or other events.
+## Getting Started
 
-### `npm test`
+Before you start, make sure you have Node.js and npm installed on your machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository:
 
-### `npm run build`
+```bash
+  git clone https://github.com/AnaMaria-Sole/pildora-usestate.git
+cd pildora-usestate
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+2. Install the dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+3. Start the development server:
 
-### `npm run eject`
+```bash
+npm start
+```
+## Examples
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Contador
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+import React, { useState } from 'react';
+import './App.css';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+function Contador() {
+  const [counter, setCounter] = useState(0);
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  return (
+    <div className="App">
+      <h1>{counter}</h1>
+      <button onClick={() => setCounter(counter + 2)}>
+        INCREMENTAR
+      </button>
+      <button onClick={() => setCounter(counter - 1)}>
+        DECREMENTAR
+      </button>
+    </div>
+  );
+}
 
-## Learn More
+export default Contador;
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### ActualizarTexto
+The `ActualizarTexto` component shows how to update state with text input from the user. As the user types in the input field, the displayed text updates in real-time.
 
-### Code Splitting
+```javascript
+import React, { useState } from 'react';
+import './App.css';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+function ActualizarTexto() {
+  const [text, setText] = useState('');
 
-### Analyzing the Bundle Size
+  return (
+    <div className="App">
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <p>Texto actual: {text}</p>
+    </div>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+export default ActualizarTexto;
+````
 
-### Making a Progressive Web App
+### Nombre
+The `Nombre` component demonstrates how to manage more complex state objects. It allows the user to change the name displayed on the screen by clicking a button.
+```javascript
+import React, { useState } from 'react';
+import './App.css';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+function Nombre() {
+  const [person, setPerson] = useState({
+    name: "Ana Victoria",
+  });
 
-### Advanced Configuration
+  function handleNameChange() {
+    setPerson({
+      ...person,
+      name: "Ophelia",
+    });
+  }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  return (
+    <div className="App">
+      <h1>{person.name}</h1>
+      <button onClick={handleNameChange}>
+        CAMBIAR
+      </button>
+    </div>
+  );
+}
 
-### Deployment
+export default Nombre;
+````
+## Running the Examples
+To run any of the examples, replace the component imported in App.js with the one you want to test. For example, to test the Contador component:
+1. Open `src/App.js` and modify the import statement:
+```javascript
+import Contador from './Contador';
+````
+2. Ensure that App.js renders the Contador component:
+```javascript
+function App() {
+  return (
+    <div className="App">
+      <Contador />
+    </div>
+  );
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default App;
+````
+3. Save the file, and the development server should automatically reload, showing the `Contador` component in action.
+Repeat the above steps for `ActualizarTexto` and `Nombre` to test those components.
+    
+## Conclusion
+These examples should give you a basic understanding of how to use the `useState` hook to manage state in functional React components. Feel free to experiment with the code and expand on these examples to learn more about state management in React.
