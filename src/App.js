@@ -1,25 +1,73 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+
+// CONTADOR
+
+
+function Contador() {
+  const [counter,setCounter] = useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{counter}</h1>
+      <button onClick={() => setCounter(counter + 2)}>
+        INCREMENTAR
+      </button>
+      <button onClick={() => setCounter(counter - 1)}>
+        DECREMENTAR
+      </button>
     </div>
   );
 }
 
-export default App;
+export default Contador;
+
+
+// ESCRIBIR TEXTO ACTUAL
+
+
+// function ActualizarTexto() {
+//   const [text,setText] = useState('');
+
+//   return (
+//     <div className="App">
+//       <input
+//       type="text"
+//       value={text}
+//       onChange={(e) => setText(e.target.value)}  //cada vez que se escribe en el campo, el evento 'onChange' se activa y actualiza el estado con el valor ingresado.
+//       />
+//      <p>Texto actual: {text}</p>
+//     </div>
+//   )
+// }
+
+// export default ActualizarTexto;
+
+
+
+// CAMBIAR NOMBRE CON UN BOTÓN
+
+// function Nombre() {
+//   const [person, setPerson] = useState ({
+//     name: "Ana Victoria",     // Objeto de datos
+//   })
+
+//   function handleNameChange() { // Aquí reemplazamos lo que teniamos
+//     setPerson({
+//       ...person,  //utilizando el estado que ya teniamos
+//       name: "Ophelia",
+//     })
+//   }
+
+//   return (
+//     <div className="App">
+//       <h1>{person.name}</h1>
+//       <button onClick={handleNameChange}>
+//         CAMBIAR
+//       </button>
+//     </div>
+//   );
+// }
+
+// export default Nombre;
